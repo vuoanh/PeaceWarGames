@@ -9,6 +9,7 @@ public class PeaceWarGame {
     private int numRounds;
 
     /**
+     * Runs a command-line version of PeaceWarGame
      *
      * @param args command-line arguments where
      *             args[0] is number of rounds
@@ -16,16 +17,22 @@ public class PeaceWarGame {
      */
     public static void main(String[] args) {
         System.out.println("Welcome to the Peace War Game!");
-        System.out.println("This will be a showdown of " + args[0] + "years!");
+        int numRounds = Integer.parseInt(args[0]);
+        System.out.println("This will be a showdown of " + args[0] + " years.\n");
 
+        PeaceWarGame peaceWarGame = new PeaceWarGame(new RandomPlayer("ai1"), new RandomPlayer("ai2"), numRounds);
+        peaceWarGame.play();
+        System.out.println("P1: " + peaceWarGame.player1Score);
+        System.out.println("P2: " + peaceWarGame.player2Score);
         return;
     }
 
     /**
      * creates a new PeaceWarGame that is played by the two players
      * (see the Player interface below) for the specified number of rounds.
-     * @param player1 a Player
-     * @param player2 a player
+     *
+     * @param player1   a Player
+     * @param player2   a player
      * @param numRounds must be a non-negative integer
      */
     public PeaceWarGame(Player player1, Player player2, int numRounds) {
@@ -53,6 +60,10 @@ public class PeaceWarGame {
             // inform the players about their opponent's moves
             player1.recordOpponentMove(i, move2);
             player2.recordOpponentMove(i, move1);
+
+            // print moves to console
+            System.out.println(player1.getName() + " chose " + move1.toString());
+            System.out.println(player2.getName() + " chose " + move2.toString());
 
             // find out what happens
             switch (move1) {
@@ -83,6 +94,7 @@ public class PeaceWarGame {
                     }
                     break;
             }
+            System.out.println(); // newline
         }
     }
 

@@ -16,4 +16,13 @@ public enum Move {
             return "war";
         }
     }
+
+    @Override
+    public String toString() {
+        if (this == PEACE) {
+            return "peace";
+        } else {
+            return "war";
+        }
+    }
 }
